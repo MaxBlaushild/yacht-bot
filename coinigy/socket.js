@@ -3,13 +3,14 @@
 const socketCluster = require('socketcluster-client');
 const config = require('./config');
 const profiles = require('./profiles');
-const socket = socketCluster.connect(config.socket);
 
+var socket;
 var subscriptions = [];
 var authenticated = false;
 
 function connect() {
 	return new Promise((resolve, reject) => {
+    socket = socketCluster.connect(config.socket);
 		socket.on('connect', () => {
 	    socket.emit("auth", profiles.max, (err, token) => {
 	    	authenticated = err ? false : true;
@@ -21,8 +22,7 @@ function connect() {
 
 function subscribe(channel, callback) {
 	if (!authenticated) {
-		throw new Error('Must be authenticated to subscribe.');
-		return;
+		throw new Error('Must be connected to subscribe.');
 	}
 
 	socket

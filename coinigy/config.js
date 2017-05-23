@@ -4,7 +4,7 @@ const profiles = require('./profiles');
 
 module.exports = {
 	socket: {
-		hostname: 'sc-02.coinigy.com',    
+		hostname: 'sc-02.coinigy.com',
   	port: '443',
   	secure: 'true'
 	},
