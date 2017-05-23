@@ -6,5 +6,6 @@ const restApi = require('./restApi');
 module.exports = {
 	connect: socket.connect,
 	subscribe: socket.subscribe,
-	getUserInfo: restApi.getUserInfo
+	getUserInfo: restApi.getUserInfo,
+  getExchanges: restApi.getExchanges
 };

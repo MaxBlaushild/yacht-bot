@@ -14,13 +14,20 @@ function makeOptions(uri, method, data) {
 
 function makeRequest(uri, method, data) {
 	let options = makeOptions(uri, method, data);
-	return request(options);
+	return request(options)
+          .then(response => JSON.parse(response))
+          .then(response => response.data);
 }
 
 function getUserInfo() {
 	return makeRequest('/userInfo', 'POST');
 }
 
+function getExchanges() {
+  return makeRequest('/exchanges', 'POST');
+}
+
 module.exports = {
-	getUserInfo
+	getUserInfo,
+  getExchanges
 };
