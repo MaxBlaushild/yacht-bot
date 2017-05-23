@@ -14,7 +14,7 @@ function connect() {
 	    socket.emit("auth", profiles.max, (err, token) => {
 	    	authenticated = err ? false : true;
 	    	authenticated ? resolve() : reject();
-	  	});
+	    });
 		});
 	});
 }
