@@ -4,30 +4,63 @@ const request = require('request-promise-native');
 const config = require('./config');
 const _ = require('lodash');
 
-function makeOptions(uri, method, data) {
+const makeOptions = (uri, method, data) => {
 	let options = _.clone(config.restApi);
 	options.uri = `${options.uri}${uri}`;
 	options.method = method;
-	options.data = data;
+	options.body = JSON.stringify(data);
 	return options;
 }
 
-function makeRequest(uri, method, data) {
+const makeRequest = (uri, method, data) => {
 	let options = makeOptions(uri, method, data);
-	return request(options)
-          .then(response => JSON.parse(response))
-          .then(response => response.data);
+	return request(options).then(response => JSON.parse(response));
 }
 
-function getUserInfo() {
-	return makeRequest('/userInfo', 'POST');
+const getUserInfo = () => {
+	return makeRequest('/userInfo', 'POST').then(response => response.data);
 }
 
-function getExchanges() {
-  return makeRequest('/exchanges', 'POST');
+const getExchanges = () => {
+  return makeRequest('/exchanges', 'POST').then(response => response.data);
+}
+
+const getMarketsForExchange = (exhange_code) => {
+  return makeRequest('/markets', 'POST', { exhange_code }).then(response => response.data);
+}
+
+const placeOrder = (order) => {
+  return makeRequest('/addOrder', 'POST', order);
+}
+
+const getAccounts = () => {
+  return makeRequest('/accounts', 'POST').then(response => response.data);
+}
+
+const addApiKey = (apiKey) => {
+  return makeRequest('/addApiKey', 'POST', apiKey);
+}
+
+const removeApiKey = (apiKey) => {
+  return makeRequest('/deleteApiKey', 'POST', apiKey);
+}
+
+const getOrders = () => {
+  return makeRequest('/orders', 'POST').then(response => response.data);
+}
+
+const getBalances = () => {
+  return makeRequest('/balances', 'POST').then(response => response)
 }
 
 module.exports = {
 	getUserInfo,
-  getExchanges
+  getExchanges,
+  placeOrder,
+  getAccounts,
+  placeOrder,
+  addApiKey,
+  removeApiKey,
+  getOrders,
+  getMarketsForExchange
 };

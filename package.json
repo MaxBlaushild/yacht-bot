@@ -9,11 +9,23 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "coinbase": "^2.0.6",
+    "coinbase-node": "^0.2.1",
+    "crypto": "0.0.3",
+    "gdax": "github:maxblaushild/gdax-node",
+    "gemini-api": "^2.0.2",
+    "kraken-api": "^0.1.7",
     "lodash": "^4.17.4",
+    "loki": "0.0.0",
     "mongoose": "^4.10.1",
+    "node.bittrex.api": "^0.2.5",
+    "pg": "^6.2.2",
+    "plnx": "0.0.10",
+    "poloniex-api-node": "^1.1.1",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
     "request-promise-native": "^1.0.4",
+    "sequelize": "^3.30.4",
     "socketcluster-client": "^5.3.1"
   }
 }

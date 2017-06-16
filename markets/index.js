@@ -1,10 +1,12 @@
 'use strict';
 
+const Trade = require('./../models').trade;
+
 const markets = {}
 
-function sync(data) {
-  markets[data.exchange] = data.price;
-  console.log(markets);
+const sync = (trade) => {
+  markets[trade.exchange] = trade.price;
+  Trade.create(trade);
 }
 
 module.exports = {

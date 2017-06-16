@@ -8,7 +8,7 @@ var socket;
 var subscriptions = [];
 var authenticated = false;
 
-function connect() {
+const connect = () => {
 	return new Promise((resolve, reject) => {
     socket = socketCluster.connect(config.socket);
 		socket.on('connect', () => {
@@ -20,7 +20,7 @@ function connect() {
 	});
 }
 
-function subscribe(channel, callback) {
+const subscribe = (channel, callback) => {
 	if (!authenticated) {
 		throw new Error('Must be connected to subscribe.');
 	}
