@@ -6,6 +6,7 @@ const PLNX = require('./poloniex');
 const CNBS = require('./coinbase');
 const GDAX = require('./gdax');
 const GMNI = require('./gemini');
+const BITS = require('./bitstamp');
 
 module.exports = {
   BTRX,
@@ -13,7 +14,8 @@ module.exports = {
   PLNX,
   CNBS,
   GDAX,
-  GMNI
+  GMNI,
+  BITS
 };
 
 
@@ -23,8 +25,6 @@ module.exports = {
  // Bter
  // Bitfinex
  // BTC China
- // Kraken
- // Poloniex
  // Bittrex
  // C-Cex
  // HitBTC
@@ -64,4 +64,3 @@ module.exports = {
  // BTC Markets
  // Livecoin
  // Yunbi
- // Global Digital Asset Exchange

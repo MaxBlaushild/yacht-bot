@@ -22,7 +22,7 @@ const mostRecentTransaction = () => {
 };
 
 const getDepositAddress = () => {
-  getMyAccount()
+  return getMyAccount()
   .then(acct => acct.getAddresses())
   .then(addrs => addrs[0].address)
 };

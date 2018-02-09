@@ -4,10 +4,6 @@ const encryption = require('./../../utils').encryption;
 
 module.exports = (sequelize, DataTypes) => {
   const Account = sequelize.define('account', {
-    auth_id: DataTypes.INTEGER,
-    exch_id: DataTypes.INTEGER,
-    coinigy_trade_enabled: DataTypes.BOOLEAN,
-    exch_trade_enabled: DataTypes.BOOLEAN,
     api_nickname: DataTypes.STRING,
     api_key: {
       type: DataTypes.STRING,
@@ -22,10 +18,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     classMethods: {
       associate: (models) => {
-        Account.belongsTo(models.exchange, {
-          sourceKey: 'exch_id',
-          foreignKey: 'exch_id'
-        });
+        Account.belongsTo(models.exchange);
+        Account.belongsTo(models.user);
       }
     }
   });

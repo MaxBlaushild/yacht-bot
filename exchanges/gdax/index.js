@@ -4,7 +4,8 @@ const GDAX = require('gdax');
 const config = require('./config');
 const coinbase = require('./../coinbase');
 
-const client = new GDAX.AuthenticatedClient(config.apiKey, config.apiSecret, config.passphrase, config.apiURI);
+let client = new GDAX.AuthenticatedClient(config.apiKey, config.apiSecret, config.passphrase, config.apiURI);
+client.productID = 'ETH-USD'
 
 const getAccounts = () => {
   return new Promise((resolve, reject) => {
@@ -16,13 +17,27 @@ const exposesAddress = () => {
   return this.getAddress().then(address => !!address);
 };
 
-const deposit = (amount) => {
+const getBalances = () => {
+  let balances = {};
+  return getAccounts().then((accts) => {
+    accts.forEach((acct) => {
+      balances[acct.currency] = acct.balance;
+    });
+    return balances;
+  });
+}
+
+const getBalance = (currency) => {
+  return getBalances().then(bs => bs[currency]);
+}
+
+const deposit = (currency, amount) => {
   return coinbase
     .getMyAccount()
     .then((account) => {
       const deposit = {
         amount,
-        currency: 'BTC',
+        currency,
         coinbase_account_id: account.account.id
       };
 
@@ -53,5 +68,8 @@ const unwrapResponse = (resolve, reject) => {
 module.exports = {
   getAccounts,
   deposit,
-  transfer
+  transfer,
+  getBalances,
+  getBalance,
+  client
 };

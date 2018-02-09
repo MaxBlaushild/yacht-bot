@@ -22,7 +22,6 @@ class Account {
       this.account.getAddresses(null, unwrapRequest(resolve, reject));
     });
   }
-
 }
 
 const unwrapRequest = (resolve, reject) => {

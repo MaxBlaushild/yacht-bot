@@ -12,7 +12,7 @@ const getDepositAddress = () => {
 };
 
 const unwrapResponse = (resolve, reject) => {
-  return (data) => {
+  return (data, secondthing) => {
       if (data === false) {
         reject(new Error('Something is broken?'));
       }
@@ -23,6 +23,26 @@ const unwrapResponse = (resolve, reject) => {
   };
 };
 
+const getBalance = (currency) => {
+  return new Promise((resolve, reject) => {
+    bittrex.getbalance({ currency }, unwrapResponse(resolve, reject));
+  });
+}
+
+const transfer = (quantity, address) => {
+  const transfer = {
+    currency: 'BTC',
+    quantity,
+    address
+  };
+
+  return new Promise((resolve, reject) => {
+    bittrex.withdraw(transfer, unwrapResponse(resolve, reject));
+  });
+};
+
 module.exports = {
-  getDepositAddress
+  getDepositAddress,
+  getBalance,
+  transfer
 };

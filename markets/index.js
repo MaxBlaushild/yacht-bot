@@ -4,9 +4,15 @@ const Trade = require('./../models').trade;
 
 const markets = {}
 
-const sync = (trade) => {
-  markets[trade.exchange] = trade.price;
-  Trade.create(trade);
+const sync = (channel) => {
+  markets[channel] = {};
+
+  return (trade) => {
+    markets[channel][trade.exchange] = trade.price;
+    console.log(markets);
+  }
+
+  // Trade.create(trade);
 }
 
 module.exports = {

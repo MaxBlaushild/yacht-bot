@@ -29,8 +29,15 @@ const transfer = (amount, toAddress) => {
   })
 };
 
+const getCurrencies = () => {
+  return new Promise((resolve, reject) => {
+    client.returnCurrencies(unwrapResponse(resolve, reject));
+  }).then(res => Object.keys(res));
+}
+
 module.exports = {
   getBalances,
   getDepositAddress,
-  transfer
+  transfer,
+  getCurrencies
 };

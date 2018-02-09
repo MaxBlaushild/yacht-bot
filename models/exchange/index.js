@@ -27,17 +27,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     classMethods: {
       associate: (models) => {
-        Exchange.hasMany(models.market, {
-          sourceKey: 'exch_id',
-          foreignKey: 'exch_id'
-        });
-
-        Exchange.hasOne(models.account, {
-          targetKey: 'exch_id',
-          foreignKey: 'exch_id'
-        });
-
-        Exchange.hasOne(models.address);
+        Exchange.hasMany(models.market);
+        Exchange.hasMany(models.account);
+        Exchange.hasMany(models.address);
       }
     }
   });

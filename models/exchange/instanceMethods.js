@@ -7,6 +7,7 @@ module.exports = (Model) => {
   Model.Instance.prototype.buy = buy;
   Model.Instance.prototype.newAccount = newAccount;
   Model.Instance.prototype.transfer = transfer;
+  Model.Instance.prototype.isImplemented = isImplemented;
 };
 
 function transfer(amount, toAddress) {
@@ -21,11 +22,15 @@ function transfer(amount, toAddress) {
     return this.getAddress().then((fromAddress) => {
       return Transfer.create({
         to_address_id: toAddress.id,
-        from_address_id: fromAddress ? fromAddress || 0,
+        from_address_id: fromAddress ? fromAddress : 0,
         amount
       });
     });
   });
+}
+
+function isImplemented() {
+  return this.api.transfer;
 }
 
 function populateAddress() {
